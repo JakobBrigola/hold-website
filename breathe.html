@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breathe – HOLD</title>
+<meta name="theme-color" content="#16181B">
+<link rel="icon" href="assets/logo.svg">
+<link rel="stylesheet" href="style.css">
+<style>
+.br{min-height:calc(100vh - 66px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.orb{width:min(62vw,300px);aspect-ratio:1;border-radius:50%;border:clamp(18px,4vw,28px) solid var(--lime);transform:scale(.6);transition:transform 2s ease-in-out;margin:30px 0}
+.cue{font-family:'Archivo Black';font-size:clamp(30px,6vw,46px);min-height:1.2em}
+.sub{color:var(--dust);margin-top:8px;min-height:1.6em}
+.tabs{display:flex;gap:8px;margin-top:26px}
+.tabs button{background:none;border:1.5px solid var(--rule);color:var(--chalk);padding:10px 16px;border-radius:30px;cursor:pointer;font:700 13px 'Archivo Narrow';letter-spacing:.12em;text-transform:uppercase}
+.tabs button.on{border-color:var(--lime);color:var(--lime)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD"></a>
+  <nav><a href="index.html#mission">Mission</a><a href="index.html#help">Help</a></nav>
+  <a class="btn sm ghost" href="index.html" style="margin-left:auto">HOLD home</a>
+</div></header>
+<main class="br">
+  <span class="n kicker l">Free for everyone · no sign-up</span>
+  <h1 class="h" style="font-size:clamp(34px,6vw,56px)">Hands done.<br>Now the head.</h1>
+  <div class="orb" id="orb"></div>
+  <div class="cue" id="cue">Ready?</div>
+  <div class="sub" id="sub">Two breaths in through the nose, one long breath out.</div>
+  <div class="tabs"><button class="on" data-m="1">1 min</button><button data-m="3">3 min</button><button data-m="5">5 min</button></div>
+  <button class="btn" id="go" style="margin-top:22px">Start</button>
+  <p class="muted" style="font-size:14px;max-width:440px;margin-top:40px">A short breathing routine to wind down after training, free for every athlete, coach and parent. You don’t need to buy anything. No login, no cookies, no tracking.<br>Need to talk to someone? <a href="tel:116111" style="color:var(--lime)">116 111</a> · free and anonymous.</p>
+</main>
+<script>
+(() => {
+  const orb = document.getElementById('orb'), cue = document.getElementById('cue'), sub = document.getElementById('sub'), go = document.getElementById('go');
+  let mins = 1, timer = null, end = 0;
+  const qm = +new URLSearchParams(location.search).get('m');
+  if ([1, 3, 5].includes(qm)) { mins = qm; document.querySelectorAll('[data-m]').forEach(x => x.classList.toggle('on', +x.dataset.m === qm)); }
+  document.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { document.querySelectorAll('[data-m]').forEach(x => x.classList.remove('on')); b.classList.add('on'); mins = +b.dataset.m; });
+  const steps = [['Breathe in', 2000, .9], ['A little more', 1000, 1], ['Long breath out', 6000, .55]];
+  function stop(msg) { clearTimeout(timer); timer = null; go.textContent = 'Start'; cue.textContent = msg || 'Ready?'; orb.style.transition = 'transform 1.5s'; orb.style.transform = 'scale(.6)'; sub.textContent = msg ? 'Well done. Strong hands, strong mind.' : 'Two breaths in through the nose, one long breath out.'; }
+  function run(i) {
+    const left = Math.max(0, Math.round((end - Date.now()) / 1000));
+    if (Date.now() >= end) return stop('Done.');
+    const [t, d, s] = steps[i]; cue.textContent = t; sub.textContent = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') + ' left';
+    orb.style.transition = `transform ${d}ms ease-in-out`; orb.style.transform = `scale(${s})`;
+    timer = setTimeout(() => run((i + 1) % 3), d);
+  }
+  go.onclick = () => { if (timer) return stop(); end = Date.now() + mins * 60000; go.textContent = 'Stop'; run(0); };
+})();
+</script>
+</body>
+</html>
