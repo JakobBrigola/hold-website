@@ -77,31 +77,23 @@
   }
 
   /* ---------- hero background video ---------- */
-  const v = $('#herovid'), ctl = $('#vidctl');
+  const v = $('#herovid');
   if (v) {
     const portrait = matchMedia('(orientation: portrait)');
-    let userPaused = reduce.matches, visible = true;
-    try { const p = sessionStorage.getItem('hold-hero-paused'); if (p !== null) userPaused = p === '1'; } catch (e) {}
+    let userPaused = reduce.matches, visible = true;   // reduced motion: show only the still
     v.muted = true; v.defaultMuted = true;
-    const label = () => {
-      if (!ctl) return;
-      const playing = !userPaused;
-      $('.vlabel', ctl).textContent = playing ? 'Pause video' : 'Play video';   // the visible text is the button's name
-      $('.ic', ctl).className = 'ic ' + (playing ? 'pause' : 'play');
-    };
     const sync = () => {
-      root.classList.toggle('still', userPaused); // the same control also stops the small decorative loops
+      root.classList.toggle('still', userPaused); // also stops the small decorative loops
       const want = !userPaused && visible && !document.hidden && !!v.dataset.cur;
       if (want) {
         const p = v.play();
-        // autoplay refused (e.g. iOS Low Power Mode): show the still and offer Play, so one tap starts it
-        if (p && p.catch) p.catch(e => { if (e && e.name === 'NotAllowedError') { userPaused = true; root.classList.add('still'); label(); } });
+        // autoplay refused (e.g. iOS Low Power Mode): keep the still
+        if (p && p.catch) p.catch(e => { if (e && e.name === 'NotAllowedError') { userPaused = true; root.classList.add('still'); } });
       } else v.pause();
-      label();
     };
     const setSrc = () => {
       const k = portrait.matches ? 'port' : 'land';
-      // paused from the start (reduced motion or an earlier pause): show only the still, download nothing until Play
+      // reduced motion: show only the still and download nothing
       if (userPaused && !v.dataset.cur) { v.poster = v.dataset[k + 'Poster']; sync(); return; }
       if (v.dataset.cur === k) return;
       v.dataset.cur = k;
@@ -118,12 +110,6 @@
     const ready = () => v.classList.add('ready');
     v.addEventListener('playing', ready);
     v.addEventListener('loadeddata', ready);
-    if (ctl) ctl.addEventListener('click', () => {
-      userPaused = !userPaused;
-      try { sessionStorage.setItem('hold-hero-paused', userPaused ? '1' : '0'); } catch (e) {}
-      if (!userPaused && v.preload === 'none') { v.preload = 'auto'; }
-      if (!userPaused && !v.dataset.cur) setSrc(); else sync();   // first Play: load the film now
-    });
     portrait.addEventListener('change', setSrc);
     document.addEventListener('visibilitychange', sync);
     if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { visible = en.isIntersecting; sync(); }).observe(v.closest('.hero') || v);

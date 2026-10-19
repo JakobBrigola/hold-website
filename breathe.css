@@ -122,7 +122,7 @@
 }
 @media(max-width:640px){
   .b-feat{padding:18px 18px 18px;gap:10px}
-  .b-prev{width:min(100%,196px);margin:0 auto}
+  .b-prev{width:min(100%,196px);width:clamp(120px,calc(100svh - 590px),196px);margin:0 auto}
   .b-feat-line{font-size:15px}
   .b-start{min-height:56px}
   .b-lib,.b-notes{padding:64px 0}
@@ -301,4 +301,11 @@ html.b-lock,html.b-lock body{overflow:hidden}
 }
 @media(max-width:640px) and (max-height:600px){
   .b-feat-line{display:none}
+}
+/* short desktop / projector windows (1280x720, laptops with browser bars): keep Start on the first screen */
+@media(min-width:861px) and (max-height:860px){
+  .b-hero{padding-top:24px;padding-bottom:56px}
+  .b-feat{gap:10px;padding:20px 24px 18px}
+  .b-feat .b-pat.lg,.b-feat .b-legend{display:none}
+  .b-prev{width:clamp(110px,calc(100vh - 410px),300px);width:clamp(110px,calc(100svh - 410px),300px)}
 }
