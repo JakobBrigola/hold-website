@@ -1,4 +1,4 @@
-/* HOLD site chrome: header, mobile menu, hero video, film dialog, reveal-on-scroll.
+/* HOLD site chrome: header, mobile menu, hero video, reveal-on-scroll.
    No tracking, no cookies, no third-party requests: it only loads the site’s own video files. */
 (() => {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -78,10 +78,9 @@
 
   /* ---------- hero background video ---------- */
   const v = $('#herovid'), ctl = $('#vidctl');
-  let pauseHero = () => {}, resumeHero = () => {};
   if (v) {
     const portrait = matchMedia('(orientation: portrait)');
-    let userPaused = reduce.matches, visible = true, held = false;
+    let userPaused = reduce.matches, visible = true;
     try { const p = sessionStorage.getItem('hold-hero-paused'); if (p !== null) userPaused = p === '1'; } catch (e) {}
     v.muted = true; v.defaultMuted = true;
     const label = () => {
@@ -92,7 +91,7 @@
     };
     const sync = () => {
       root.classList.toggle('still', userPaused); // the same control also stops the small decorative loops
-      const want = !userPaused && visible && !held && !document.hidden && !!v.dataset.cur;
+      const want = !userPaused && visible && !document.hidden && !!v.dataset.cur;
       if (want) {
         const p = v.play();
         // autoplay refused (e.g. iOS Low Power Mode): show the still and offer Play, so one tap starts it
@@ -128,52 +127,7 @@
     portrait.addEventListener('change', setSrc);
     document.addEventListener('visibilitychange', sync);
     if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { visible = en.isIntersecting; sync(); }).observe(v.closest('.hero') || v);
-    pauseHero = () => { held = true; sync(); };
-    resumeHero = () => { held = false; sync(); };
     setSrc();
-  }
-
-  /* ---------- film dialog ---------- */
-  const dlg = $('#filmdlg'), film = $('#filmvid');
-  let opener = null;
-  $$('[data-film]').forEach(b => b.addEventListener('click', () => {
-    if (!dlg || typeof dlg.showModal !== 'function') { location.href = (film && film.dataset.src) || 'assets/hold.mp4'; return; }
-    opener = b;
-    if (film && !film.dataset.loaded) {
-      film.dataset.loaded = '1';
-      if (film.dataset.poster) film.poster = film.dataset.poster;
-      [[film.dataset.src, 'video/mp4'], [film.dataset.webm, 'video/webm']].forEach(([src, type]) => {
-        if (!src) return;
-        const el = document.createElement('source'); el.src = src; el.type = type; film.appendChild(el);
-      });
-      // no playable source in this browser: replace the endless spinner with a direct link
-      const fail = () => {
-        if (!film.isConnected || film.dataset.failed) return;
-        film.dataset.failed = '1';
-        const a = document.createElement('a');
-        a.className = 'fd-fail'; a.href = film.dataset.src; a.textContent = 'Can’t play here – open the film';
-        film.replaceWith(a);
-      };
-      const srcs = [...film.querySelectorAll('source')];
-      if (srcs.length) srcs[srcs.length - 1].addEventListener('error', fail);
-      film.addEventListener('error', fail);
-      film.load();
-    }
-    pauseHero();
-    dlg.showModal();
-    root.classList.add('menu-open');
-    const x = $('[data-film-close]', dlg); if (x) x.focus();
-    if (film && film.isConnected) { const p = film.play(); if (p && p.catch) p.catch(() => {}); }
-  }));
-  if (dlg) {
-    $$('[data-film-close]', dlg).forEach(b => b.addEventListener('click', () => dlg.close()));
-    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
-    dlg.addEventListener('close', () => {
-      if (film) film.pause();
-      root.classList.remove('menu-open');
-      resumeHero();
-      if (opener) opener.focus();
-    });
   }
 
   /* ---------- survey dots ---------- */
