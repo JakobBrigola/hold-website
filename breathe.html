@@ -7,6 +7,9 @@
 <meta name="description" content="Six short, free breathing exercises for gymnasts: after training, before you compete, after a mistake, for tight hands and before sleep. No sign-up, no tracking.">
 <meta name="theme-color" content="#16181B">
 <link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Archivo+Narrow:wght@600;700&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="breathe.css">
 </head>
@@ -14,7 +17,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD" width="87" height="24"></a>
-  <nav aria-label="Main"><a href="index.html#mission">Mission</a><a href="index.html#help">Help</a></nav>
+  <button class="menubtn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span><span class="sr">Menu</span></button>
+  <nav id="menu" aria-label="Main">
+    <a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Promises</a><a href="breathe.html" class="on" aria-current="page">Breathe</a><a href="#help">Help</a>
+    <a class="menu-only" href="shop.html">Shop</a>
+    <p class="menu-only menu-help">Need to talk? <a href="tel:116111">116 111</a> · free and anonymous</p>
+  </nav>
   <a class="btn sm ghost b-home" href="index.html">HOLD home</a>
 </div></header>
 
@@ -24,7 +32,7 @@
     <div class="wrap b-hero-in">
       <div class="b-intro">
         <span class="n kicker l">Free for everyone · no sign-up</span>
-        <h1 class="h"><span>Hands done.</span> <span>Now the head.</span></h1>
+        <h1 class="h"><span>Hands done.</span> <span class="lime">Now the head.</span></h1>
       </div>
       <article class="b-feat" id="feat" aria-labelledby="featName">
         <div class="b-feat-top"><span class="n" id="featMoment">After training</span><span class="b-len" id="featLen">1 min</span></div>
@@ -35,7 +43,8 @@
         <div class="b-pat lg" id="featPat" aria-hidden="true"></div>
         <p class="b-legend n" id="featLegend"></p>
         <button class="btn b-start" id="featStart" type="button"><span id="featStartT">Start · 1 min</span><span class="arr" aria-hidden="true">→</span></button>
-        <p class="b-safe">Breathe gently, never force. If you feel dizzy or light-headed, stop and breathe normally.</p>
+        <p class="b-safe">Breathe gently, never force. If you feel dizzy or <span class="nw">light-headed</span>, stop and breathe normally.</p>
+        <p class="b-safe b-talk">Need to talk? <a href="tel:116111">116 111</a> · free and anonymous</p>
       </article>
       <div class="b-more">
         <p class="b-lead">Six short breathing exercises for the moments gymnasts know. <b>Free for every athlete, coach and parent, whether or not you ever buy HOLD.</b></p>
@@ -66,15 +75,15 @@
       </div>
       <div class="b-note4">
         <div class="b-note"><span class="n">01</span><b>Breathe gently, never force.</b><p>Comfortable is the right amount. If a count feels too long, make it shorter.</p></div>
-        <div class="b-note"><span class="n">02</span><b>Dizzy? Stop.</b><p>If you feel dizzy or light-headed, stop and breathe normally.</p></div>
+        <div class="b-note"><span class="n">02</span><b>Dizzy? Stop.</b><p>If you feel dizzy or <span class="nw">light-headed</span>, stop and breathe normally.</p></div>
         <div class="b-note"><span class="n">03</span><b>Care, not cure.</b><p>These exercises can help you wind down and refocus. They are not therapy or medical treatment.</p></div>
-        <div class="b-note"><span class="n">04</span><b>Nothing is stored or sent.</b><p>You don’t need to buy anything. No login, no cookies, no tracking. Sound and vibration cues are optional and off by default.</p></div>
+        <div class="b-note"><span class="n">04</span><b>Nothing you do here is stored or sent.</b><p>You don’t need to buy anything. No login, no cookies, no tracking. Sound and vibration cues are optional and off by default.</p></div>
       </div>
     </div>
   </section>
 
   <!-- help -->
-  <section class="b-help" aria-labelledby="helpH">
+  <section class="b-help" id="help" aria-labelledby="helpH">
     <div class="wrap b-help-in">
       <div>
         <span class="n kicker" id="helpH">Need to talk?</span>
@@ -94,7 +103,7 @@
   <nav class="f-col" aria-label="Footer"><span class="n">Explore</span><a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Our promises</a></nav>
   <div class="f-col"><span class="n">Free &amp; shop</span><a href="breathe.html">Breathe (free)</a><a href="shop.html">Pre-order</a><a href="shop.html#clubs">For clubs</a></div>
   <div class="f-col"><span class="n">Help</span><a href="tel:116111">116 111 · Nummer gegen Kummer</a><span>Safe Sport e.V.</span><a href="tel:112">In danger: 112</a></div>
-  <p class="f-fine">© 2026 HOLD</p>
+  <p class="f-fine">© 2026 HOLD · A student business-ethics project at Loyola. The shop is a demo: nothing is ordered, charged or sent.</p>
 </div></footer>
 
 <!-- session player: takes over the screen while you breathe -->
@@ -172,6 +181,7 @@
   <p class="bp-keys n" aria-hidden="true">Space pause · Esc end</p>
 </div>
 
+<script src="site.js"></script>
 <script src="breathe.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 /* HOLD Breathe: six guided breathing exercises.
-   Everything runs in this browser tab. Nothing is stored or sent:
-   no cookies, no localStorage, no analytics, no network requests. */
+   Everything runs in this browser tab. Nothing you do here is stored or sent:
+   this script uses no cookies, no localStorage, no analytics and makes no network requests.
+   (The page itself loads the Archivo fonts from Google Fonts.) */
 (() => {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
@@ -30,7 +31,7 @@
       build: () => [4, 5, 6, 6, 6, 6, 6].map((o, i) => ({
         ph: [IN(2, 'through the nose', 0.72), SIP(1), OUT(o, 'long and slow, through the mouth')],
         cue: [
-          'Fill up through the nose, then top up with a little sip.',
+          'In through the nose, a little sip, then a long sigh out.',
           'Let the out-breath get a little longer.',
           'Long and slow, like a quiet sigh.',
           'Let your shoulders drop.',
@@ -52,7 +53,7 @@
           'In for 4, out for 6. Let the count guide you.',
           'Let your shoulders drop.',
           'Unclench your jaw.',
-          'Feel your feet on the floor.',
+          'Feel where your body is supported.',
           'Soften your hands. Let them rest open.',
           'Mind wandering? That’s normal. Come back to the count.',
           'Training is over. Nothing to prove right now.',
@@ -78,7 +79,7 @@
           'Last box. Stay even.'
         ];
         const r = cues.map(cue => ({
-          ph: [IN(4), HOLD(4, 'lungs full, shoulders soft'), OUT(4, 'slow and even'), HOLD(4, 'empty and calm')], cue
+          ph: [IN(4), HOLD(4, 'comfortably full, shoulders soft'), OUT(4, 'slow and even'), HOLD(4, 'relaxed, no squeezing')], cue
         }));
         // finish with one ordinary breath so you step out of the pattern, not out of a hold
         r.push({ outro: true, ph: [IN(4, 'a normal breath'), OUT(4, 'and let the pattern go')], cue: 'Eyes up. You’re ready.' });
@@ -89,15 +90,15 @@
     {
       id: 'hands', moment: 'Release your hands', mins: 2, name: 'Grip & release', group: 'train', skin: 'hand', unit: 'Round',
       line: 'Make a soft fist as you breathe in, hold, then let go and spread your fingers as you breathe out.',
-      pat: [['in', 4], ['hold', 3], ['out', 7]], legend: 'Squeeze 4 · hold 3 · let go 7 sec',
+      pat: [['in', 4], ['hold', 3], ['out', 7]], legend: 'Soft fist 4 · hold 3 · let go 7 sec',
       note: 'If a rip hurts, make a softer fist.',
       prep: 'Rest your forearms on your thighs, palms up. If a rip hurts, make a softer fist.',
       regs: ['Fingers', 'Wrists', 'Forearms', 'Shoulders'],
       build: () => {
         const R = [
-          ['Breathe in · make a soft fist', 'keep the grip soft', 'Breathe out · spread your fingers wide'],
+          ['Breathe in · curl your fingers in', 'keep the grip soft', 'Breathe out · spread your fingers wide'],
           ['Breathe in · fist, curl your wrists in', 'feel your wrists', 'Breathe out · let your wrists go loose'],
-          ['Breathe in · squeeze into your forearms', 'notice the tension', 'Breathe out · let your forearms go heavy'],
+          ['Breathe in · fist, feel it in your forearms', 'notice the tension', 'Breathe out · let your forearms go heavy'],
           ['Breathe in · fist, lift your shoulders', 'hold it softly', 'Breathe out · drop your shoulders, open your hands']
         ];
         const cues = [
@@ -112,7 +113,7 @@
         ];
         const r = cues.map((cue, i) => {
           const s = R[Math.floor(i / 2)];
-          return { reg: Math.floor(i / 2), cue, ph: [ph('in', 4, 'Squeeze', s[0], 1), ph('hold', 3, 'Hold', s[1], null), ph('out', 7, 'Let go', s[2], 0)] };
+          return { reg: Math.floor(i / 2), cue, ph: [ph('in', 4, 'Soft fist', s[0], 1), ph('hold', 3, 'Hold', s[1], null), ph('out', 7, 'Let go', s[2], 0)] };
         });
         r.push({ outro: true, reg: -1, ph: [ph('free', 8, 'Shake out', 'your hands, loosely · breathe normally', 0)], cue: 'Grip done. Hands loose.' });
         return r;
@@ -149,10 +150,10 @@
           'Your shoulders. Let them melt away from your ears.',
           'Your jaw. Soften it, and your tongue, and your eyes.'
         ];
-        const r = [{ reg: -1, cue: 'Get comfortable. Let the bed hold you.', ph: [IN(4), OUT(8, 'slowly, all the way')] }];
+        const r = [{ reg: -1, cue: 'Get comfortable. Let the bed hold you.', ph: [IN(4), OUT(8, 'slowly, let it go on its own')] }];
         for (let i = 0; i < 24; i++) {
           const g = Math.floor(i / 4);
-          r.push({ reg: g, cue: i === 23 ? 'Stay here as long as you like.' : cues[g], ph: [IN(4), OUT(8, 'slowly, all the way')] });
+          r.push({ reg: g, cue: i === 23 ? 'Stay here as long as you like.' : cues[g], ph: [IN(4), OUT(8, 'slowly, let it go on its own')] });
         }
         return r;
       },
@@ -599,7 +600,7 @@
     setText(P.word, 'Paused');
     setText(P.sub, auto ? 'Paused while you were away.' : 'Take your time. Resume when you’re ready.');
     S.savedCue = P.cue.dataset.t;
-    setCue('Dizzy or light-headed? Stop and breathe normally.');
+    setCue('Dizzy or light-\u2060headed? Stop and breathe normally.');   // word joiner: never break after the hyphen
     setPauseUI(true);
     unlockScreen();
   }
@@ -632,6 +633,9 @@
     setText($('#bpDone'), 'Done.');
     setText($('#bpDoneT'), completed ? `${mmss(doneS)} completed · ${ex.name}` : `${mmss(doneS)} of ${mmss(S.total / 1000)} · ${ex.name}`);
     setText($('#bpDoneL'), ex.id === 'sleep' ? 'Sleep well. Put the phone away and keep breathing slowly.' : completed ? 'Notice how your body feels right now.' : 'Stopping early is fine. Every slow breath counts.');
+    // before sleep: no check-in, no next exercise, no "again" – just the way out and the help line
+    const night = ex.id === 'sleep';
+    $('#bpNext').hidden = night; $('.bp-check').hidden = night; $('#bpAgain').hidden = night;
     $$('[data-feel]').forEach(b => b.setAttribute('aria-pressed', 'false'));
     $('#checkR').textContent = '';
     const [nid, why] = ex.next, nx = BY[nid];
@@ -661,11 +665,11 @@
   const FEEL = {
     calmer: 'Good. Take that feeling with you.',
     same: 'That’s okay. Some days take longer. You can go again, or just rest for a moment.',
-    low: 'Thanks for being honest. Breathing doesn’t fix everything. If something is weighing on you, talk to someone: 116 111 is free and anonymous.'
+    low: 'Thanks for being honest. Breathing doesn’t fix everything. If something is weighing on you, talk to someone: <a href="tel:116111">116 111</a> is free and anonymous.'
   };
   $$('[data-feel]').forEach(b => b.addEventListener('click', () => {
     $$('[data-feel]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    $('#checkR').textContent = FEEL[b.dataset.feel];
+    $('#checkR').innerHTML = FEEL[b.dataset.feel];   // fixed strings from this file only
   }));
 
   /* wiring */

@@ -1,5 +1,5 @@
 /* HOLD site chrome: header, mobile menu, hero video, film dialog, reveal-on-scroll.
-   No tracking, no cookies, no network requests. */
+   No tracking, no cookies, no third-party requests: it only loads the site’s own video files. */
 (() => {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
@@ -33,6 +33,12 @@
     if (!header || !menuBtn) return;
     header.classList.toggle('open', open);
     root.classList.toggle('menu-open', open);
+    // keep keyboard focus inside the open menu: everything else on the page is inert
+    [...document.body.children].forEach(el => {
+      if (el === header || el.tagName === 'SCRIPT') return;
+      if (open && !el.inert) { el.inert = true; el.dataset.menuInert = '1'; }
+      else if (!open && el.dataset.menuInert) { el.inert = false; delete el.dataset.menuInert; }
+    });
     menuBtn.setAttribute('aria-expanded', String(open));
     $('.sr', menuBtn).textContent = open ? 'Close menu' : 'Menu';
     if (!open && focusBtn) menuBtn.focus();
@@ -46,22 +52,28 @@
 
   /* ---------- active section in the nav ---------- */
   const links = $$('#menu a[href^="#"]');
+  const pageLink = $('#menu a[aria-current="page"]');   // e.g. "Breathe" on breathe.html: underlined unless a section link is
+  const showPage = () => { if (pageLink) pageLink.classList.toggle('on', !links.some(l => l.classList.contains('on'))); };
   const targets = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
   if (targets.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(en => {
-        if (!en.isIntersecting) return;
-        links.forEach(a => {
-          const on = a.hash === '#' + en.target.id;
-          a.classList.toggle('on', on);
-          on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
-        });
+        const a = links.find(l => l.hash === '#' + en.target.id);
+        if (!a) return;
+        if (en.isIntersecting) {
+          links.forEach(l => {
+            const on = l === a;
+            l.classList.toggle('on', on);
+            on ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current');
+          });
+        } else if (a.classList.contains('on')) { a.classList.remove('on'); a.removeAttribute('aria-current'); }
       });
+      showPage();
     }, { rootMargin: '-45% 0px -50% 0px' });
     targets.forEach(t => io.observe(t));
     // clear the highlight while the hero is on screen
     const hero = $('.hero');
-    if (hero) new IntersectionObserver(([en]) => { if (en.isIntersecting && en.intersectionRatio > .5) links.forEach(a => { a.classList.remove('on'); a.removeAttribute('aria-current'); }); }, { threshold: [.5, .6] }).observe(hero);
+    if (hero) new IntersectionObserver(([en]) => { if (en.isIntersecting && en.intersectionRatio > .5) { links.forEach(a => { a.classList.remove('on'); a.removeAttribute('aria-current'); }); showPage(); } }, { threshold: [.5, .6] }).observe(hero);
   }
 
   /* ---------- hero background video ---------- */
@@ -75,18 +87,23 @@
     const label = () => {
       if (!ctl) return;
       const playing = !userPaused;
-      $('.vlabel', ctl).textContent = playing ? 'Pause video' : 'Play video';
+      $('.vlabel', ctl).textContent = playing ? 'Pause video' : 'Play video';   // the visible text is the button's name
       $('.ic', ctl).className = 'ic ' + (playing ? 'pause' : 'play');
-      ctl.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
     };
     const sync = () => {
       root.classList.toggle('still', userPaused); // the same control also stops the small decorative loops
-      const want = !userPaused && visible && !held && !document.hidden;
-      if (want) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause();
+      const want = !userPaused && visible && !held && !document.hidden && !!v.dataset.cur;
+      if (want) {
+        const p = v.play();
+        // autoplay refused (e.g. iOS Low Power Mode): show the still and offer Play, so one tap starts it
+        if (p && p.catch) p.catch(e => { if (e && e.name === 'NotAllowedError') { userPaused = true; root.classList.add('still'); label(); } });
+      } else v.pause();
       label();
     };
     const setSrc = () => {
       const k = portrait.matches ? 'port' : 'land';
+      // paused from the start (reduced motion or an earlier pause): show only the still, download nothing until Play
+      if (userPaused && !v.dataset.cur) { v.poster = v.dataset[k + 'Poster']; sync(); return; }
       if (v.dataset.cur === k) return;
       v.dataset.cur = k;
       v.classList.remove('ready');
@@ -106,7 +123,7 @@
       userPaused = !userPaused;
       try { sessionStorage.setItem('hold-hero-paused', userPaused ? '1' : '0'); } catch (e) {}
       if (!userPaused && v.preload === 'none') { v.preload = 'auto'; }
-      sync();
+      if (!userPaused && !v.dataset.cur) setSrc(); else sync();   // first Play: load the film now
     });
     portrait.addEventListener('change', setSrc);
     document.addEventListener('visibilitychange', sync);
@@ -122,12 +139,31 @@
   $$('[data-film]').forEach(b => b.addEventListener('click', () => {
     if (!dlg || typeof dlg.showModal !== 'function') { location.href = (film && film.dataset.src) || 'assets/hold.mp4'; return; }
     opener = b;
-    if (film && !film.getAttribute('src')) { if (film.dataset.poster) film.poster = film.dataset.poster; film.src = film.dataset.src; }
+    if (film && !film.dataset.loaded) {
+      film.dataset.loaded = '1';
+      if (film.dataset.poster) film.poster = film.dataset.poster;
+      [[film.dataset.src, 'video/mp4'], [film.dataset.webm, 'video/webm']].forEach(([src, type]) => {
+        if (!src) return;
+        const el = document.createElement('source'); el.src = src; el.type = type; film.appendChild(el);
+      });
+      // no playable source in this browser: replace the endless spinner with a direct link
+      const fail = () => {
+        if (!film.isConnected || film.dataset.failed) return;
+        film.dataset.failed = '1';
+        const a = document.createElement('a');
+        a.className = 'fd-fail'; a.href = film.dataset.src; a.textContent = 'Can’t play here – open the film';
+        film.replaceWith(a);
+      };
+      const srcs = [...film.querySelectorAll('source')];
+      if (srcs.length) srcs[srcs.length - 1].addEventListener('error', fail);
+      film.addEventListener('error', fail);
+      film.load();
+    }
     pauseHero();
     dlg.showModal();
     root.classList.add('menu-open');
     const x = $('[data-film-close]', dlg); if (x) x.focus();
-    if (film) { const p = film.play(); if (p && p.catch) p.catch(() => {}); }
+    if (film && film.isConnected) { const p = film.play(); if (p && p.catch) p.catch(() => {}); }
   }));
   if (dlg) {
     $$('[data-film-close]', dlg).forEach(b => b.addEventListener('click', () => dlg.close()));

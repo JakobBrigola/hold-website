@@ -6,6 +6,9 @@
 <title>Shop – HOLD Recovery Hand Cream</title>
 <meta name="theme-color" content="#16181B">
 <link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Archivo+Narrow:wght@600;700&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,10 +38,10 @@
       <span class="pill n">Pre-order · ships May 2027</span>
       <h1 class="h">HOLD Recovery<br>Hand Cream</h1>
       <p class="lead">Water-based, grip-neutral gel-cream for gymnasts’ hands. Absorbs before the next rotation and keeps calluses supple, not soft.</p>
-      <div class="opts" role="radiogroup" aria-label="Pack">
-        <button class="opt on" data-sku="single"><span class="n">Single</span><b>€14.90</b><small>1 × 100 ml</small></button>
-        <button class="opt" data-sku="duo"><span class="n">Duo</span><b>€26.90</b><small>2 × 100 ml</small></button>
-        <button class="opt" data-sku="trio"><span class="n">Trio</span><b>€34.90</b><small>3 × 100 ml</small></button>
+      <div class="opts" role="group" aria-label="Pack">
+        <button class="opt on" type="button" aria-pressed="true" data-sku="single"><span class="n">Single</span><b>€14.90</b><small>1 × 100 ml</small></button>
+        <button class="opt" type="button" aria-pressed="false" data-sku="duo"><span class="n">Duo</span><b>€26.90</b><small>2 × 100 ml</small></button>
+        <button class="opt" type="button" aria-pressed="false" data-sku="trio"><span class="n">Trio</span><b>€34.90</b><small>3 × 100 ml</small></button>
       </div>
       <div class="buy">
         <div class="qty"><button data-q="-1" aria-label="Less">−</button><span id="qty">1</span><button data-q="1" aria-label="More">+</button></div>
@@ -84,7 +87,7 @@
   <nav class="f-col" aria-label="Footer"><span class="n">Explore</span><a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Our promises</a></nav>
   <div class="f-col"><span class="n">Free &amp; shop</span><a href="breathe.html">Breathe (free)</a><a href="shop.html">Pre-order</a><a href="#clubs">For clubs</a></div>
   <div class="f-col"><span class="n">Help</span><a href="tel:116111">116 111 · Nummer gegen Kummer</a><span>Safe Sport e.V.</span><a href="tel:112">In danger: 112</a></div>
-  <p class="f-fine">© 2026 HOLD</p>
+  <p class="f-fine">© 2026 HOLD · A student business-ethics project at Loyola. The shop is a demo: nothing is ordered, charged or sent.</p>
 </div></footer>
 
 <div class="scrim" id="scrim"></div>
@@ -100,10 +103,11 @@
   </footer>
 </aside>
 
-<div class="modal" id="co" role="dialog" aria-label="Checkout">
+<div class="modal" id="co" role="dialog" aria-modal="true" aria-label="Checkout">
   <div id="costep">
-    <div style="display:flex;justify-content:space-between;align-items:start"><h3 class="h">Checkout</h3><button class="x" data-close>×</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:start"><h3 class="h">Checkout</h3><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <p class="muted" style="font-size:15px">Pre-order. Ships May 2027. No payment is taken today.</p>
+    <p class="demo-note">Demo shop for a student project: no order is placed, and nothing you type is stored or sent.</p>
     <label class="field"><span>Email</span><input type="email" autocomplete="off" placeholder="you@example.com"></label>
     <div class="f2"><label class="field"><span>First name</span><input autocomplete="off"></label><label class="field"><span>Last name</span><input autocomplete="off"></label></div>
     <label class="field"><span>Street and number</span><input autocomplete="off"></label>
@@ -115,23 +119,24 @@
   </div>
   <div id="cook" class="ok" hidden>
     <div class="ring"></div>
-    <h3 class="h">Thank you.</h3>
-    <p class="muted">Your pre-order <b id="ordno" style="color:var(--chalk)"></b> is reserved. We will confirm before anything ships in May 2027.</p>
-    <p class="muted" style="margin-top:14px"><b class="lime" id="okfund"></b> of it goes to the HOLD Fund.</p>
+    <h3 class="h" tabindex="-1">Thanks for trying it.</h3>
+    <p class="muted">This is a demo, so no order was placed and nothing was sent. When HOLD launches, pre-orders ship in May 2027.</p>
+    <p class="muted" style="margin-top:14px">In the real shop, <b class="lime" id="okfund"></b> of this order would go to the HOLD Fund.</p>
     <a class="btn" href="breathe.html" style="margin-top:24px">Take a 1-minute breath</a>
   </div>
 </div>
 
-<div class="modal" id="clubm" role="dialog" aria-label="Club offer">
+<div class="modal" id="clubm" role="dialog" aria-modal="true" aria-label="Club offer">
   <div id="clubform">
-    <div style="display:flex;justify-content:space-between;align-items:start"><h3 class="h">Club offer</h3><button class="x" data-close>×</button></div>
-    <p class="muted" style="font-size:15px">Tell us about your club. We reply within two working days.</p>
+    <div style="display:flex;justify-content:space-between;align-items:start"><h3 class="h">Club offer</h3><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p class="muted" style="font-size:15px">Tell us about your club.</p>
+    <p class="demo-note">Demo form for a student project: nothing is sent.</p>
     <label class="field"><span>Club</span><input autocomplete="off" placeholder="e.g. TSV Musterstadt, gymnastics department"></label>
     <label class="field"><span>Contact email</span><input type="email" autocomplete="off"></label>
     <label class="field"><span>Active gymnasts</span><select><option>under 40</option><option selected>40–80</option><option>80–150</option><option>over 150</option></select></label>
     <button class="btn" id="clubsend" style="width:100%;justify-content:center;margin-top:20px">Request offer</button>
   </div>
-  <div id="clubok" class="ok" hidden><div class="ring"></div><h3 class="h">Thanks!</h3><p class="muted">We’ll be in touch with your club offer and the workshop dates.</p></div>
+  <div id="clubok" class="ok" hidden><div class="ring"></div><h3 class="h" tabindex="-1">Thanks!</h3><p class="muted">Demo only: nothing was sent. In the real shop we would reply with your club offer and the workshop dates.</p></div>
 </div>
 <div class="toast" id="toast"></div>
 <script src="app.js"></script>

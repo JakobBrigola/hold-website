@@ -17,12 +17,31 @@
     $('#checkout').disabled = !cart.length; $('#checkout').style.opacity = cart.length ? 1 : .5;
   }
   const scrim = $('#scrim');
-  const open = el => { el.classList.add(el.classList.contains('drawer') ? 'open' : 'on'); scrim && scrim.classList.add('on'); };
-  const closeAll = () => { $$('.drawer,.modal').forEach(e => e.classList.remove('open', 'on')); scrim && scrim.classList.remove('on'); };
+  // drawer and pop-ups: focus moves in when they open, the page behind is inert, and focus returns to the opener on close
+  let opener = null;
+  const layers = '.drawer.open,.modal.on';
+  const behind = () => [...document.body.children].filter(x => !x.matches('.drawer,.modal,.scrim,.toast,script'));
+  const focusIn = el => { const f = el.querySelector('input:not([type=hidden]),select,button:not([disabled])'); if (f) setTimeout(() => f.focus({ preventScroll: true }), 30); };
+  const open = el => {
+    const menuX = $('.nav.open .menubtn'); if (menuX) menuX.click();   // close the mobile menu first
+    if (!$$(layers).length) opener = document.activeElement;
+    el.classList.add(el.classList.contains('drawer') ? 'open' : 'on'); scrim && scrim.classList.add('on');
+    behind().forEach(x => { x.inert = true; });
+    focusIn(el);
+  };
+  const closeAll = () => {
+    const wasOpen = $$(layers).length;
+    $$('.drawer,.modal').forEach(e => e.classList.remove('open', 'on')); scrim && scrim.classList.remove('on');
+    if (!wasOpen) return;
+    behind().forEach(x => { x.inert = false; });
+    let back = opener;
+    if (!back || !document.contains(back) || back.closest('.drawer,.modal')) back = $('[data-open-cart]');
+    if (back) back.focus({ preventScroll: true });
+  };
   const toast = t => { const e = $('#toast'); if (!e) return; e.textContent = t; e.classList.add('on'); setTimeout(() => e.classList.remove('on'), 2200); };
   // product page
   let sku = 'single', q = 1;
-  $$('.opt').forEach(b => b.onclick = () => { $$('.opt').forEach(x => x.classList.remove('on')); b.classList.add('on'); sku = b.dataset.sku; });
+  $$('.opt').forEach(b => b.onclick = () => { $$('.opt').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); }); sku = b.dataset.sku; });
   $$('[data-q]').forEach(b => b.onclick = () => { q = Math.max(1, Math.min(20, q + +b.dataset.q)); $('#qty').textContent = q; });
   $$('.thumbs button').forEach(b => b.onclick = () => { $$('.thumbs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); const m = $('#mainimg'); m.src = b.dataset.img; m.style.objectFit = b.dataset.img.endsWith('.png') ? 'contain' : 'cover'; m.parentElement.style.background = b.dataset.img.endsWith('.png') ? '#2a2d31' : ''; });
   const add = $('#add'); if (add) add.onclick = () => { const f = cart.find(c => c.sku === sku); f ? f.q += q : cart.push({ sku, q }); save(); paint(); open($('#drawer')); };
@@ -36,11 +55,12 @@
   const co = $('#checkout'); if (co) co.onclick = () => { $('#drawer').classList.remove('open'); $('#costep').hidden = false; $('#cook').hidden = true; open($('#co')); };
   const place = $('#place'); if (place) place.onclick = () => {
     const fund = sum() / 1.19 * 0.02;
-    $('#ordno').textContent = 'HOLD-' + Math.floor(100000 + Math.random() * 900000); $('#okfund').textContent = eur(fund);
+    $('#okfund').textContent = eur(fund);   // demo: no order number, nothing is reserved
     $$('#co input').forEach(i => i.value = '');   // nothing is stored or sent
     cart = []; save(); paint(); $('#costep').hidden = true; $('#cook').hidden = false;
+    const h = $('#cook .h'); if (h) h.focus({ preventScroll: true });
   };
-  const cs = $('#clubsend'); if (cs) cs.onclick = () => { $$('#clubm input').forEach(i => i.value = ''); $('#clubform').hidden = true; $('#clubok').hidden = false; };
+  const cs = $('#clubsend'); if (cs) cs.onclick = () => { $$('#clubm input').forEach(i => i.value = ''); $('#clubform').hidden = true; $('#clubok').hidden = false; const h = $('#clubok .h'); if (h) h.focus({ preventScroll: true }); };
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
   paint();
 })();

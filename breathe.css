@@ -1,7 +1,7 @@
 /* HOLD Breathe page (breathe.html). Loads after style.css. */
 .bpage{--under:var(--ink)}
 .nav .b-home{margin-left:6px}
-@media(max-width:860px){.nav .b-home{margin-left:auto}}
+@media(max-width:1020px){.nav .b-home{margin-left:auto}}
 
 /* ---------- hero: intro + featured exercise ---------- */
 .b-hero{position:relative;overflow:hidden;padding:56px 0 88px}
@@ -31,6 +31,8 @@
 .b-feat-line{color:var(--dust);font-size:16px;line-height:1.5}
 .b-start{justify-content:center;min-height:58px;font-size:15px;margin-top:6px;width:100%}
 .b-safe{font-size:13px;color:var(--dim);line-height:1.5;text-align:center}
+.b-talk{margin-top:-4px;color:var(--dust)}
+.b-talk a{color:var(--lime);font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
 
 /* pattern mini timeline (in / sip / hold / out) */
 .b-pat{display:flex;gap:3px;height:8px;width:100%}
@@ -119,7 +121,6 @@
   .b-intro,.b-more{max-width:560px}
 }
 @media(max-width:640px){
-  .wrap{padding:0 16px}
   .b-feat{padding:18px 18px 18px;gap:10px}
   .b-prev{width:min(100%,196px);margin:0 auto}
   .b-feat-line{font-size:15px}
@@ -159,7 +160,9 @@ html.b-lock,html.b-lock body{overflow:hidden}
 
 .bp-run{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 20px 0;text-align:center}
 .bp-run[hidden]{display:none}
-.bp-stage{position:relative;width:min(80vw,44vh,420px);aspect-ratio:1;flex-shrink:0;transition:opacity .4s}
+/* the circle shrinks with the window height so text and buttons never overlap (short laptop / projector windows, small phones) */
+.bp-stage{position:relative;width:min(80vw,44vh,420px);width:clamp(150px,min(80vw,44vh,100svh - 430px),420px);aspect-ratio:1;flex-shrink:0;transition:opacity .4s}
+.bp[data-x="reset"] .bp-stage,.bp[data-x="calm"] .bp-stage,.bp[data-x="focus"] .bp-stage{width:clamp(150px,min(80vw,44vh,100svh - 400px),420px)} /* no body-area row: a little more room */
 .bp-svg,.bp-svg svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
 .bp-count{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(40px,11vw,64px);line-height:1;color:var(--chalk);pointer-events:none;font-variant-numeric:tabular-nums}
 .bp[data-phase="lead"] .bp-count{color:var(--lime)}
@@ -168,14 +171,14 @@ html.b-lock,html.b-lock body{overflow:hidden}
 .bp-word{font-size:clamp(36px,9.6vw,64px);margin-top:clamp(14px,3vh,28px);min-height:1.02em}
 .bp-sub{color:var(--dust);font-size:17px;margin-top:8px;min-height:1.55em;max-width:36ch}
 .bp[data-phase="lead"] .bp-sub{min-height:3.1em}
-.bp-regs{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:14px;font-size:11px;color:var(--steel)}
+.bp-regs{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:14px;font-size:11px;color:var(--dim)}
 .bp-regs[hidden]{display:none}
 .bp-regs li{position:relative;padding-bottom:5px;transition:color .4s}
 .bp-regs li::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--lime);transform:scaleX(0);transition:transform .5s var(--ease)}
 .bp-regs li.past{color:var(--dust)}
 .bp-regs li.on{color:var(--lime)}
 .bp-regs li.on::after{transform:scaleX(1)}
-.bp-cue{font-size:18px;line-height:1.45;color:var(--chalk);margin-top:14px;min-height:2.9em;max-width:30ch;transition:opacity .28s,transform .28s var(--ease)}
+.bp-cue{font-size:18px;line-height:1.45;color:var(--chalk);margin-top:14px;min-height:2.9em;max-width:30ch;text-wrap:balance;transition:opacity .28s,transform .28s var(--ease)}
 .bp-cue.fade{opacity:0;transform:translateY(4px)}
 .bp-meta{display:flex;gap:18px;justify-content:center;color:var(--dim);font-size:12px;margin-top:6px;font-variant-numeric:tabular-nums}
 .bp-meta span+span::before{content:'·';margin-right:18px;color:var(--rule)}
@@ -187,8 +190,17 @@ html.b-lock,html.b-lock body{overflow:hidden}
 .bp-pi::before{left:1px}.bp-pi::after{right:1px}
 .bp-pause.is-paused .bp-pi::before{left:2px;width:0;height:0;border-radius:0;background:transparent;border-style:solid;border-width:7px 0 7px 11px;border-color:transparent transparent transparent currentColor}
 .bp-pause.is-paused .bp-pi::after{display:none}
-.bp-keys{position:absolute;right:18px;bottom:16px;font-size:11px;color:var(--steel);display:none}
+.bp-keys{position:absolute;right:18px;bottom:16px;font-size:11px;color:var(--dim);display:none}
 @media(hover:hover) and (pointer:fine) and (min-width:900px){.bp-keys{display:block}}
+.bp[data-state="done"] .bp-keys{display:none}
+@media(max-height:720px){
+  .bp-word{font-size:clamp(32px,7vh,52px);margin-top:10px}
+  .bp-sub{font-size:16px;margin-top:4px}
+  .bp-regs{margin-top:8px}
+  .bp-cue{font-size:16px;margin-top:8px}
+  .bp-ctrl{padding-top:10px}
+  .bp-ctrl .btn{min-height:50px}
+}
 .bp.paused .bp-stage{opacity:.35}
 .bp.paused .bp-word{color:var(--dust)}
 
@@ -242,6 +254,8 @@ html.b-lock,html.b-lock body{overflow:hidden}
 .bp-check-b button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--lime);color:var(--lime)}
 .bp-check-r{font-size:16px;color:var(--chalk);margin-top:14px;min-height:0}
 .bp-check-r:empty{display:none}
+.bp-check-r a{color:var(--lime);font-weight:700}
+.bp-check[hidden],.bp-next[hidden],.bp-end-ctrl .btn[hidden]{display:none}
 .bp-check-n{font-size:13px;color:var(--dim);margin-top:12px}
 .bp-next{width:100%;margin-top:14px;display:grid;grid-template-columns:1fr auto;grid-template-areas:"k go" "t go" "m go";align-items:center;gap:2px 16px;text-align:left;padding:20px;border-radius:10px;background:var(--raised);border:1px solid var(--rule);color:var(--chalk);font:inherit;cursor:pointer;transition:border-color .25s}
 .bp-next:hover{border-color:var(--lime)}
@@ -249,8 +263,8 @@ html.b-lock,html.b-lock body{overflow:hidden}
 .bp-next b{grid-area:t;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:22px;letter-spacing:-.01em;line-height:1.15}
 .bp-next-m{grid-area:m;color:var(--dust);font-size:15px}
 .bp-next-go{grid-area:go;color:var(--lime);font-size:13px}
-.bp-end-ctrl{display:flex;gap:10px;width:100%;margin-top:14px}
-.bp-end-ctrl .btn{flex:1;justify-content:center;min-height:54px}
+.bp-end-ctrl{display:flex;justify-content:center;gap:10px;width:100%;margin-top:14px}
+.bp-end-ctrl .btn{flex:1;max-width:280px;justify-content:center;min-height:54px}
 .bp-help{width:100%;margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);font-size:16px;color:var(--dust)}
 .bp-help b{color:var(--chalk)}
 .bp-help a{color:var(--lime);font-weight:700}
@@ -258,13 +272,15 @@ html.b-lock,html.b-lock body{overflow:hidden}
 
 /* small phones: icon-only toggles */
 @media(max-width:440px){
+  .bp-check-b{gap:6px}
+  .bp-check-b button{padding:0 12px;font-size:14px}
   .bp-tog{width:44px;padding:0;justify-content:center}
   .bp-tog-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 /* short landscape phones: pacer beside the text */
 @media(orientation:landscape) and (max-height:520px){
   .bp-run{flex-direction:row;gap:28px;padding-top:0}
-  .bp-stage{width:min(40vw,58vh)}
+  .bp-stage,.bp[data-x] .bp-stage{width:min(40vw,58vh)}
   .bp-text{align-items:flex-start;text-align:left;max-width:420px}
   .bp-word{margin-top:0}
   .bp-regs{justify-content:flex-start}
@@ -274,8 +290,15 @@ html.b-lock,html.b-lock body{overflow:hidden}
   .b-card,.b-card-go span,.bp,.bp-cue,.bp-regs li,.bp-regs li::after{transition:none}
   .b-card:hover{transform:none}
 }
+/* small phones (iPhone SE / mini with Safari bars): the Start button stays on the first screen */
 @media(max-width:640px) and (max-height:700px){
+  .b-hero{padding-top:16px}
+  .b-intro{margin-bottom:14px}
   .b-prev{width:min(100%,132px)}
   .b-intro h1{font-size:34px}
   .b-feat-line{font-size:14px}
+  .b-feat .b-pat.lg,.b-feat .b-legend{display:none}
+}
+@media(max-width:640px) and (max-height:600px){
+  .b-feat-line{display:none}
 }
