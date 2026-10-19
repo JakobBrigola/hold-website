@@ -2,55 +2,176 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Breathe – HOLD</title>
+<meta name="description" content="Six short, free breathing exercises for gymnasts: after training, before you compete, after a mistake, for tight hands and before sleep. No sign-up, no tracking.">
 <meta name="theme-color" content="#16181B">
 <link rel="icon" href="assets/logo.svg">
 <link rel="stylesheet" href="style.css">
-<style>
-.br{min-height:calc(100vh - 66px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
-.orb{width:min(62vw,300px);aspect-ratio:1;border-radius:50%;border:clamp(18px,4vw,28px) solid var(--lime);transform:scale(.6);transition:transform 2s ease-in-out;margin:30px 0}
-.cue{font-family:'Archivo Black';font-size:clamp(30px,6vw,46px);min-height:1.2em}
-.sub{color:var(--dust);margin-top:8px;min-height:1.6em}
-.tabs{display:flex;gap:8px;margin-top:26px}
-.tabs button{background:none;border:1.5px solid var(--rule);color:var(--chalk);padding:10px 16px;border-radius:30px;cursor:pointer;font:700 13px 'Archivo Narrow';letter-spacing:.12em;text-transform:uppercase}
-.tabs button.on{border-color:var(--lime);color:var(--lime)}
-</style>
+<link rel="stylesheet" href="breathe.css">
 </head>
-<body>
+<body class="bpage">
+<a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
-  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD"></a>
-  <nav><a href="index.html#mission">Mission</a><a href="index.html#help">Help</a></nav>
-  <a class="btn sm ghost" href="index.html" style="margin-left:auto">HOLD home</a>
+  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD" width="87" height="24"></a>
+  <nav aria-label="Main"><a href="index.html#mission">Mission</a><a href="index.html#help">Help</a></nav>
+  <a class="btn sm ghost b-home" href="index.html">HOLD home</a>
 </div></header>
-<main class="br">
-  <span class="n kicker l">Free for everyone · no sign-up</span>
-  <h1 class="h" style="font-size:clamp(34px,6vw,56px)">Hands done.<br>Now the head.</h1>
-  <div class="orb" id="orb"></div>
-  <div class="cue" id="cue">Ready?</div>
-  <div class="sub" id="sub">Two breaths in through the nose, one long breath out.</div>
-  <div class="tabs"><button class="on" data-m="1">1 min</button><button data-m="3">3 min</button><button data-m="5">5 min</button></div>
-  <button class="btn" id="go" style="margin-top:22px">Start</button>
-  <p class="muted" style="font-size:14px;max-width:440px;margin-top:40px">A short breathing routine to wind down after training, free for every athlete, coach and parent. You don’t need to buy anything. No login, no cookies, no tracking.<br>Need to talk to someone? <a href="tel:116111" style="color:var(--lime)">116 111</a> · free and anonymous.</p>
+
+<main id="main">
+  <!-- featured: the exercise that is ready to start (default: the 1-min reset from the QR code) -->
+  <section class="b-hero">
+    <div class="wrap b-hero-in">
+      <div class="b-intro">
+        <span class="n kicker l">Free for everyone · no sign-up</span>
+        <h1 class="h"><span>Hands done.</span> <span>Now the head.</span></h1>
+      </div>
+      <article class="b-feat" id="feat" aria-labelledby="featName">
+        <div class="b-feat-top"><span class="n" id="featMoment">After training</span><span class="b-len" id="featLen">1 min</span></div>
+        <span class="b-tag n" id="featTag">The reset on every tube</span>
+        <button class="b-prev" id="featPrev" type="button" aria-label="Start the exercise"><span class="b-prev-svg" aria-hidden="true"></span></button>
+        <h2 class="b-feat-name" id="featName">Cyclic sighing</h2>
+        <p class="b-feat-line" id="featLine">In through the nose, a short second sip, then a long, slow breath out through the mouth.</p>
+        <div class="b-pat lg" id="featPat" aria-hidden="true"></div>
+        <p class="b-legend n" id="featLegend"></p>
+        <button class="btn b-start" id="featStart" type="button"><span id="featStartT">Start · 1 min</span><span class="arr" aria-hidden="true">→</span></button>
+        <p class="b-safe">Breathe gently, never force. If you feel dizzy or light-headed, stop and breathe normally.</p>
+      </article>
+      <div class="b-more">
+        <p class="b-lead">Six short breathing exercises for the moments gymnasts know. <b>Free for every athlete, coach and parent, whether or not you ever buy HOLD.</b></p>
+        <ul class="b-free" aria-label="What it costs you"><li>No purchase</li><li>No sign-up</li><li>No app</li><li>No tracking</li></ul>
+        <a class="b-all n" href="#all">See all six exercises <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- library -->
+  <section class="b-lib" id="all" aria-labelledby="libH">
+    <div class="wrap">
+      <div class="b-sec-head">
+        <span class="n kicker">All six exercises</span>
+        <h2 class="h" id="libH">Pick your moment.</h2>
+      </div>
+      <div class="b-groups" id="groups"></div>
+      <noscript><p class="muted">The guided exercises need JavaScript. You can still breathe along: in through the nose for 4, out for 6, for one minute.</p></noscript>
+    </div>
+  </section>
+
+  <!-- safety + privacy -->
+  <section class="b-notes" aria-labelledby="notesH">
+    <div class="wrap">
+      <div class="b-sec-head">
+        <span class="n kicker">Before you start</span>
+        <h2 class="h" id="notesH">Gentle. Honest. Private.</h2>
+      </div>
+      <div class="b-note4">
+        <div class="b-note"><span class="n">01</span><b>Breathe gently, never force.</b><p>Comfortable is the right amount. If a count feels too long, make it shorter.</p></div>
+        <div class="b-note"><span class="n">02</span><b>Dizzy? Stop.</b><p>If you feel dizzy or light-headed, stop and breathe normally.</p></div>
+        <div class="b-note"><span class="n">03</span><b>Care, not cure.</b><p>These exercises can help you wind down and refocus. They are not therapy or medical treatment.</p></div>
+        <div class="b-note"><span class="n">04</span><b>Nothing is stored or sent.</b><p>You don’t need to buy anything. No login, no cookies, no tracking. Sound and vibration cues are optional and off by default.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- help -->
+  <section class="b-help" aria-labelledby="helpH">
+    <div class="wrap b-help-in">
+      <div>
+        <span class="n kicker" id="helpH">Need to talk?</span>
+        <a class="b-num h" href="tel:116111">116 111</a>
+        <p class="b-help-l">Nummer gegen Kummer · free and anonymous.</p>
+      </div>
+      <div class="b-help-more">
+        <div><b>Safe Sport e.V.</b><br>Independent support for people affected by violence in sport.</div>
+        <div><b>In danger right now?</b><br>Call <a href="tel:112">112</a>.</div>
+      </div>
+    </div>
+  </section>
 </main>
-<script>
-(() => {
-  const orb = document.getElementById('orb'), cue = document.getElementById('cue'), sub = document.getElementById('sub'), go = document.getElementById('go');
-  let mins = 1, timer = null, end = 0;
-  const qm = +new URLSearchParams(location.search).get('m');
-  if ([1, 3, 5].includes(qm)) { mins = qm; document.querySelectorAll('[data-m]').forEach(x => x.classList.toggle('on', +x.dataset.m === qm)); }
-  document.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { document.querySelectorAll('[data-m]').forEach(x => x.classList.remove('on')); b.classList.add('on'); mins = +b.dataset.m; });
-  const steps = [['Breathe in', 2000, .9], ['A little more', 1000, 1], ['Long breath out', 6000, .55]];
-  function stop(msg) { clearTimeout(timer); timer = null; go.textContent = 'Start'; cue.textContent = msg || 'Ready?'; orb.style.transition = 'transform 1.5s'; orb.style.transform = 'scale(.6)'; sub.textContent = msg ? 'Well done. Strong hands, strong mind.' : 'Two breaths in through the nose, one long breath out.'; }
-  function run(i) {
-    const left = Math.max(0, Math.round((end - Date.now()) / 1000));
-    if (Date.now() >= end) return stop('Done.');
-    const [t, d, s] = steps[i]; cue.textContent = t; sub.textContent = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') + ' left';
-    orb.style.transition = `transform ${d}ms ease-in-out`; orb.style.transform = `scale(${s})`;
-    timer = setTimeout(() => run((i + 1) % 3), d);
-  }
-  go.onclick = () => { if (timer) return stop(); end = Date.now() + mins * 60000; go.textContent = 'Stop'; run(0); };
-})();
-</script>
+
+<footer class="foot"><div class="wrap">
+  <div class="f-brand"><img src="assets/logo.svg" alt="HOLD" width="80" height="22"><p class="h">Strong hands.<br><span class="lime">Strong minds.</span></p></div>
+  <nav class="f-col" aria-label="Footer"><span class="n">Explore</span><a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Our promises</a></nav>
+  <div class="f-col"><span class="n">Free &amp; shop</span><a href="breathe.html">Breathe (free)</a><a href="shop.html">Pre-order</a><a href="shop.html#clubs">For clubs</a></div>
+  <div class="f-col"><span class="n">Help</span><a href="tel:116111">116 111 · Nummer gegen Kummer</a><span>Safe Sport e.V.</span><a href="tel:112">In danger: 112</a></div>
+  <p class="f-fine">© 2026 HOLD</p>
+</div></footer>
+
+<!-- session player: takes over the screen while you breathe -->
+<div class="bp" id="player" role="dialog" aria-modal="true" aria-labelledby="bpName" hidden>
+  <div class="bp-glow" aria-hidden="true"></div>
+  <div class="bp-top">
+    <div class="bp-title"><span class="n" id="bpMoment">After training</span><b id="bpName">Cyclic sighing</b></div>
+    <button class="bp-tog" id="bpSound" type="button" aria-pressed="false" title="Soft sound cues">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-spk" d="M4 9h3l5-4v14l-5-4H4z"/><path class="i-on" d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12"/><path class="i-off" d="M16 9l6 6M22 9l-6 6"/></svg>
+      <span class="bp-tog-t">Sound <i>off</i></span>
+    </button>
+    <button class="bp-tog" id="bpVibe" type="button" aria-pressed="false" title="Vibration cues" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="3.5" width="9" height="17" rx="2"/><path class="i-on" d="M4 8v8M20 8v8"/><path class="i-off" d="M3 21L21 3"/></svg>
+      <span class="bp-tog-t">Vibrate <i>off</i></span>
+    </button>
+  </div>
+  <div class="bp-prog" aria-hidden="true"><i id="bpBar"></i></div>
+
+  <div class="bp-run" id="bpRun">
+    <div class="bp-stage" id="bpStage">
+      <div class="bp-svg" id="bpSvg" aria-hidden="true"></div>
+      <div class="bp-count h" id="bpCount" aria-hidden="true"></div>
+    </div>
+    <div class="bp-rm" aria-hidden="true"><i id="bpRmBar"></i></div>
+    <div class="bp-text">
+      <div class="bp-word h" id="bpWord" aria-live="polite">Get ready</div>
+      <div class="bp-sub" id="bpSub"></div>
+      <ol class="bp-regs n" id="bpRegs" aria-label="Body areas"></ol>
+      <p class="bp-cue" id="bpCue"></p>
+      <div class="bp-meta n"><span id="bpRound"></span><span id="bpLeft"></span></div>
+    </div>
+  </div>
+
+  <div class="bp-end" id="bpEnd" hidden>
+    <div class="bp-end-in">
+      <span class="bp-done-ring" aria-hidden="true"></span>
+      <h2 class="h bp-done" id="bpDone" tabindex="-1">Done.</h2>
+      <p class="bp-done-t n" id="bpDoneT">1:00 completed · Cyclic sighing</p>
+      <p class="bp-done-l" id="bpDoneL"></p>
+
+      <div class="bp-check">
+        <b class="bp-check-q" id="checkQ">How do you feel now?</b>
+        <div class="bp-check-b" role="group" aria-labelledby="checkQ">
+          <button type="button" data-feel="calmer" aria-pressed="false">Calmer</button>
+          <button type="button" data-feel="same" aria-pressed="false">About the same</button>
+          <button type="button" data-feel="low" aria-pressed="false">Not great</button>
+        </div>
+        <p class="bp-check-r" id="checkR" aria-live="polite"></p>
+        <p class="bp-check-n">Optional. Your answer stays on this screen and is never saved or sent.</p>
+      </div>
+
+      <button class="bp-next" id="bpNext" type="button">
+        <span class="n bp-next-k" id="bpNextK">Next</span>
+        <b id="bpNextName">Grip &amp; release</b>
+        <span class="bp-next-m" id="bpNextM">Release your hands · 2 min</span>
+        <span class="bp-next-go n">Start <span aria-hidden="true">→</span></span>
+      </button>
+
+      <div class="bp-end-ctrl">
+        <button class="btn ghost" id="bpAgain" type="button">Again</button>
+        <button class="btn ghost" id="bpLib" type="button">All exercises</button>
+      </div>
+
+      <div class="bp-help">
+        <p><b>Need to talk?</b> <a href="tel:116111">116 111</a> · free and anonymous</p>
+        <p class="bp-help-s">Safe Sport e.V. · independent support for people affected by violence in sport. In danger right now? Call <a href="tel:112">112</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bp-ctrl" id="bpCtrl">
+    <button class="btn bp-pause" id="bpPause" type="button"><span class="bp-pi" aria-hidden="true"></span><span id="bpPauseT">Pause</span></button>
+    <button class="btn ghost" id="bpStop" type="button">End</button>
+  </div>
+  <p class="bp-keys n" aria-hidden="true">Space pause · Esc end</p>
+</div>
+
+<script src="breathe.js"></script>
 </body>
 </html>

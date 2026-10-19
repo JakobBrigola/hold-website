@@ -9,13 +9,18 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
-  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD"></a>
-  <nav><a href="index.html#mission">Mission</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Our promises</a><a href="#clubs">For clubs</a><a href="index.html#help">Help</a></nav>
+  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD" width="87" height="24"></a>
+  <button class="menubtn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span><span class="sr">Menu</span></button>
+  <nav id="menu" aria-label="Main">
+    <a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Promises</a><a href="breathe.html">Breathe</a><a href="#clubs">For clubs</a><a href="index.html#help">Help</a>
+    <p class="menu-only menu-help">Need to talk? <a href="tel:116111">116 111</a> · free and anonymous</p>
+  </nav>
   <button class="btn sm cartbtn" data-open-cart>Cart <span class="badge" data-count>0</span></button>
 </div></header>
 
-<main class="wrap">
+<main class="wrap" id="main">
   <div class="pdp">
     <div class="gal">
       <div class="main"><img id="mainimg" src="assets/tube-photo.jpg" alt="HOLD Recovery Hand Cream, 100 ml tube"></div>
@@ -74,9 +79,12 @@
   </div>
 </section>
 
-<footer><div class="wrap">
-  <div><img src="assets/logo.svg" alt="HOLD"><br>Strong hands. Strong minds.<br>© 2026 HOLD</div>
-  <div><a href="index.html#golden-share">Golden Share</a> · <a href="index.html#promises">Our promises</a> · <a href="breathe.html">Breathe</a><br>Help: 116 111 · Safe Sport e.V.</div>
+<footer class="foot"><div class="wrap">
+  <div class="f-brand"><img src="assets/logo.svg" alt="HOLD" width="80" height="22"><p class="h">Strong hands.<br><span class="lime">Strong minds.</span></p></div>
+  <nav class="f-col" aria-label="Footer"><span class="n">Explore</span><a href="index.html#mission">Mission</a><a href="index.html#story">Our story</a><a href="index.html#golden-share">Golden Share</a><a href="index.html#promises">Our promises</a></nav>
+  <div class="f-col"><span class="n">Free &amp; shop</span><a href="breathe.html">Breathe (free)</a><a href="shop.html">Pre-order</a><a href="#clubs">For clubs</a></div>
+  <div class="f-col"><span class="n">Help</span><a href="tel:116111">116 111 · Nummer gegen Kummer</a><span>Safe Sport e.V.</span><a href="tel:112">In danger: 112</a></div>
+  <p class="f-fine">© 2026 HOLD</p>
 </div></footer>
 
 <div class="scrim" id="scrim"></div>
@@ -127,5 +135,6 @@
 </div>
 <div class="toast" id="toast"></div>
 <script src="app.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

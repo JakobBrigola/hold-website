@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>HOLD – Strong hands. Strong minds.</title>
 <meta name="description" content="Recovery hand care for gymnasts, with free, independent help on every tube. Our purpose is protected by an independent athletes' trust.">
 <meta name="theme-color" content="#16181B">
@@ -10,171 +10,306 @@
 <meta property="og:title" content="HOLD – Strong hands. Strong minds.">
 <meta property="og:description" content="Care is part of training. Hand care for gymnasts, guided by athletes.">
 <meta property="og:image" content="assets/poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.HOLD_SITE)document.documentElement.classList.remove('js')},3000)</script>
 </head>
-<body>
-<header class="nav"><div class="wrap">
-  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD"></a>
-  <nav><a href="#mission">Mission</a><a href="#story">About us</a><a href="#golden-share">Golden Share</a><a href="#promises">Our promises</a><a href="#breathe">Breathe</a><a href="#help">Help</a></nav>
+<body class="home">
+<a class="skip" href="#mission">Skip to content</a>
+
+<header class="nav over" id="top"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="HOLD home"><img src="assets/logo.svg" alt="HOLD" width="87" height="24"></a>
+  <button class="menubtn" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span><span class="sr">Menu</span></button>
+  <nav id="menu" aria-label="Main">
+    <a href="#mission">Mission</a><a href="#story">Our story</a><a href="#golden-share">Golden Share</a><a href="#promises">Promises</a><a href="#breathe">Breathe</a><a href="#help">Help</a>
+    <a class="menu-only" href="shop.html">Shop</a>
+    <p class="menu-only menu-help">Need to talk? <a href="tel:116111">116 111</a> · free and anonymous</p>
+  </nav>
   <a class="btn sm cartbtn" href="shop.html">Shop <span class="badge" data-count>0</span></a>
 </div></header>
 
-<section class="hero" id="mission">
-  <img class="grip" src="assets/grip_hero.png" alt="">
-  <div class="wrap">
-    <span class="n kicker l">Our mission</span>
-    <h1 class="h">Strong hands.<br><span class="lime">Strong minds.</span></h1>
-    <p class="mission">“Our mission goes beyond physical hand care. We recognize that an athlete’s confidence, mental well-being and physical health are connected, so we want to help gymnasts feel cared for, prepared and confident, both in and outside the gym.”</p>
-    <div class="ctas"><a class="btn" href="#golden-share">How we keep this promise</a><a class="btn ghost" href="shop.html">Shop HOLD</a></div>
-    <p class="note n">Care is part of training.</p>
+<main>
+<!-- 0 · HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-video" id="herovid" muted autoplay loop playsinline preload="metadata"
+      data-land-mp4="assets/hero.mp4" data-land-webm="assets/hero.webm" data-land-poster="assets/hero-poster.jpg"
+      data-port-mp4="assets/hero-portrait.mp4" data-port-webm="assets/hero-portrait.webm" data-port-poster="assets/hero-portrait-poster.jpg"></video>
+    <noscript><video class="hero-video" muted autoplay loop playsinline preload="metadata" poster="assets/hero-poster.jpg"><source src="assets/hero.mp4" type="video/mp4"><source src="assets/hero.webm" type="video/webm"></video></noscript>
   </div>
-</section>
-
-<section class="film" aria-label="Film">
-  <div class="wrap">
-    <video src="assets/hold.mp4" poster="assets/poster.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
-    <div class="cap"><span class="n">Protect what keeps you going</span><span class="n">Made for athletes. Guided by athletes.</span></div>
-  </div>
-</section>
-
-<section id="why" style="padding-top:40px">
-  <div class="wrap">
-    <span class="n kicker">Why we exist</span>
-    <h2 class="h">What gymnasts face,<br><span class="lime">and who listens.</span></h2>
-    <p class="lead">Gymnasts ask everything of their hands and their heads. Most products and most companies were never built around them. <b>We were.</b></p>
-    <div class="face" style="margin-top:44px">
-      <div class="q">Dry, cracked, torn hands.</div><div class="a">Chalk and bars tear skin open. Normal creams are too greasy for the bar or soften the calluses gymnasts need. <b>HOLD is a water-based, grip-neutral gel-cream, designed to absorb before the next rotation.</b></div>
-      <div class="q">“Tape it and go again.”</div><div class="a">Training through pain is still treated as normal. <b>We say the opposite: open rips need cleaning, covering and rest.</b> That is printed on our pack, and we will never advertise pain as strength.</div>
-      <div class="q">Pressure nobody talks about.</div><div class="a">Perfection is the standard, and the mind rarely gets a coach. <b>Every tube carries free, independent help and a 1-minute breathing reset.</b></div>
-      <div class="q">Brands that never ask.</div><div class="a">Sports care is built for climbers, CrossFit or kitchens. <b>No brand is built with gymnastics clubs. Athletes help steer ours, and they hold a veto over our purpose.</b></div>
-    </div>
-    <div class="stat">
-      <div><div class="h">7 of 7</div><p>gymnasts we asked get dry, cracked or open hands at least once a month.</p></div>
-      <div><div class="h">0 of 7</div><p>use a product made for their sport.</p></div>
-      <div><div class="h">6 of 7</div><p>would likely use one. A first signal: our survey of 100+ gymnasts and parents comes next.</p></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <span class="n kicker l hero-k">Made for athletes. Guided by athletes.</span>
+    <h1 class="h" id="hero-title"><span class="ln">Strong hands.</span><span class="ln lime">Strong minds.</span></h1>
+    <p class="hero-sub">Recovery hand care for gymnasts. With free, independent help on every tube.</p>
+    <div class="ctas">
+      <a class="btn" href="shop.html">Pre-order <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn ghost glass" href="breathe.html"><span class="pulse" aria-hidden="true"></span>Breathe · free 1-min reset</a>
     </div>
   </div>
+  <div class="wrap hero-bar">
+    <button class="hb film-open" type="button" data-film><span class="ic play" aria-hidden="true"></span><span>Watch the film <span class="muted dur-t">0:26</span></span></button>
+    <a class="scrollcue" href="#mission"><span class="n">Scroll</span><span class="line" aria-hidden="true"></span></a>
+    <button class="hb vidctl" type="button" id="vidctl"><span class="ic pause" aria-hidden="true"></span><span class="vlabel">Pause video</span></button>
+  </div>
 </section>
 
-<section id="story" style="background:var(--raised)">
+<!-- 01 · MISSION -->
+<section id="mission" class="msn">
   <div class="wrap">
-    <div class="g2 story">
+    <div class="mgrid">
+      <div class="mside rv"><span class="n kicker sec"><i>01</i>Mission</span></div>
       <div>
-        <span class="n kicker">About us</span>
-        <h2 class="h">It started with<br><span class="lime">Kim’s hands.</span></h2>
-        <blockquote>Kim has trained as a gymnast for many years. Her hands cracked and tore open again and again. Normal creams were too greasy for the bar or made her calluses soft.</blockquote>
-        <p class="lead" style="margin-top:22px">So four athletes set out to build the care we always wanted: <b>for the hands, and for the head behind them.</b></p>
+        <p class="statement rv">“Our mission goes <em>beyond physical hand care.</em> We recognize that an athlete’s <em class="key">confidence, mental well-being and physical health are connected,</em> so we want to help gymnasts feel <em>cared for, prepared and confident,</em> both in and outside the gym.”</p>
+        <ul class="trio rv" aria-label="Three things that are connected">
+          <li><span class="ring" aria-hidden="true"></span>Confidence</li>
+          <li><span class="ring" aria-hidden="true"></span>Mental well-being</li>
+          <li><span class="ring" aria-hidden="true"></span>Physical health</li>
+        </ul>
+        <p class="sig rv"><span class="rule" aria-hidden="true"></span><span class="h">Care is part of training.</span></p>
       </div>
-      <div class="photo" style="background-image:url(assets/care.jpg)" role="img" aria-label="Hands applying HOLD after training"></div>
-    </div>
-    <div class="g4 team">
-      <div class="card"><div class="h">Jakob</div><span class="n">CEO</span><p>Finance, partnerships, investors.</p></div>
-      <div class="card"><div class="h">Jack</div><span class="n">COO</span><p>Operations, supply chain, regulation.</p></div>
-      <div class="card"><div class="h">Kim</div><span class="n">Product &amp; insights</span><p>Formula, gymnast panel, survey.</p></div>
-      <div class="card"><div class="h">Julia</div><span class="n">Brand &amp; community</span><p>Our liaison to the HOLD Athletes Trust.</p></div>
     </div>
   </div>
 </section>
 
-<section id="golden-share" class="paper">
+<div class="marquee" aria-label="HOLD in short">
+  <div class="mq-track">
+    <ul class="mq-list">
+      <li>Grip-neutral</li><li>For intact skin</li><li>116 111 on every tube</li><li>Free 1-min breathing reset</li><li>Purpose protected by athletes</li><li>Care claims, never cure claims</li>
+    </ul>
+    <ul class="mq-list" aria-hidden="true">
+      <li>Grip-neutral</li><li>For intact skin</li><li>116 111 on every tube</li><li>Free 1-min breathing reset</li><li>Purpose protected by athletes</li><li>Care claims, never cure claims</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 02 · OUR STORY -->
+<section id="story" class="story">
   <div class="wrap">
-    <span class="n kicker l">The Golden Share</span>
-    <h2 class="h">Our purpose<br>can’t be sold.</h2>
-    <p class="lead">Promises are easy to make and easy to drop, especially after a company is sold. So we built ours into the company itself. <b>An independent athletes’ trust holds one special share in HOLD: the Golden Share.</b> It earns no money. It has one job: to keep us committed to our core values.</p>
-    <div class="gs">
+    <div class="story-top">
+      <figure class="ph rv"><img src="assets/care.jpg" alt="Hands applying HOLD after training" width="1600" height="900" loading="lazy" decoding="async"></figure>
+      <div class="rv">
+        <span class="n kicker sec"><i>02</i>Our story</span>
+        <h2 class="h">It started with<br><span class="lime">Kim’s hands.</span></h2>
+        <blockquote class="kim">Kim has trained as a gymnast for many years. Her hands cracked and tore open again and again. Normal creams were too greasy for the bar or made her calluses soft.</blockquote>
+        <p class="lead">So four athletes set out to build the care we always wanted: <b>for the hands, and for the head behind them.</b></p>
+      </div>
+    </div>
+
+    <div id="why" class="block">
+      <div class="block-h rv">
+        <span class="n kicker">Why we exist</span>
+        <h3 class="h">What gymnasts face,<br><span class="lime">and who listens.</span></h3>
+        <p class="muted">Gymnasts ask everything of their hands and their heads. Most products and most companies were never built around them. <b class="chalk">We were.</b></p>
+      </div>
+      <div class="face4">
+        <article class="fc rv"><span class="fn">01</span><h4>Dry, cracked, torn hands.</h4><p>Chalk and bars tear skin open. Normal creams are too greasy for the bar or soften the calluses gymnasts need.</p><p class="ans">HOLD is a water-based, grip-neutral gel-cream, designed to absorb before the next rotation.</p></article>
+        <article class="fc rv"><span class="fn">02</span><h4>“Tape it and go again.”</h4><p>Training through pain is still treated as normal.</p><p class="ans">We say the opposite: open rips need cleaning, covering and rest. It is printed on our pack, and we will never advertise pain as strength.</p></article>
+        <article class="fc rv"><span class="fn">03</span><h4>Pressure nobody talks about.</h4><p>Perfection is the standard, and the mind rarely gets a coach.</p><p class="ans">Every tube carries free, independent help and a 1-minute breathing reset.</p></article>
+        <article class="fc rv"><span class="fn">04</span><h4>Brands that never ask.</h4><p>Sports care is built for climbers, CrossFit or kitchens. No brand is built with gymnastics clubs.</p><p class="ans">Athletes help steer ours, and they hold a veto over our purpose.</p></article>
+      </div>
+    </div>
+
+    <div class="block survey">
+      <div class="block-h rv"><span class="n kicker">What we heard</span><p class="muted">A first signal: our survey of 100+ gymnasts and parents comes next.</p></div>
+      <div class="stats3">
+        <div class="st rv"><div class="h">7 <small>of</small> 7</div><span class="dots" data-of="7" data-n="7" aria-hidden="true"></span><p>gymnasts we asked get dry, cracked or open hands at least once a month.</p></div>
+        <div class="st rv"><div class="h">0 <small>of</small> 7</div><span class="dots" data-of="7" data-n="0" aria-hidden="true"></span><p>use a product made for their sport.</p></div>
+        <div class="st rv"><div class="h">6 <small>of</small> 7</div><span class="dots" data-of="7" data-n="6" aria-hidden="true"></span><p>would likely use one.</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-h rv"><span class="n kicker">Who we are</span></div>
+      <div class="team4">
+        <div class="card tm rv"><div class="h">Jakob</div><span class="n">CEO</span><p>Finance, partnerships, investors.</p></div>
+        <div class="card tm rv"><div class="h">Jack</div><span class="n">COO</span><p>Operations, supply chain, regulation.</p></div>
+        <div class="card tm rv"><div class="h">Kim</div><span class="n">Product &amp; insights</span><p>Formula, gymnast panel, survey.</p></div>
+        <div class="card tm rv"><div class="h">Julia</div><span class="n">Brand &amp; community</span><p>Our liaison to the HOLD Athletes Trust.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · GOLDEN SHARE -->
+<section id="golden-share" class="paper gshare">
+  <div class="wrap">
+    <div class="gs-top">
+      <div class="rv">
+        <span class="n kicker sec l"><i>03</i>The Golden Share</span>
+        <h2 class="h">Our purpose<br>can’t be sold.</h2>
+      </div>
+      <p class="lead rv">Promises are easy to make and easy to drop, especially after a company is sold. So we built ours into the company itself. <b>An independent athletes’ trust holds one special share in HOLD: the Golden Share.</b> It earns no money. It has one job: to keep us committed to our core values.</p>
+    </div>
+    <div class="gs rv">
       <div class="box t"><span class="n">Holds the Golden Share</span><div class="h">HOLD Athletes Trust e.V.</div><p>Independent association. Board: an elected athlete, a safeguarding expert and a sports psychologist. Founders and investors are excluded.</p></div>
-      <div class="arrow">VETO<svg viewBox="0 0 56 20"><path d="M0 10H50M42 3l9 7-9 7" fill="none" stroke="#16181B" stroke-width="2.5"/></svg>NO DIVIDEND</div>
+      <div class="arrow" aria-hidden="true">VETO<svg viewBox="0 0 56 20"><path d="M0 10H50M42 3l9 7-9 7" fill="none" stroke="#16181B" stroke-width="2.5"/></svg>NO DIVIDEND</div>
       <div class="box"><span class="n">The company</span><div class="h">HOLD GmbH</div><p>Founders and investors own and run the business. Every decision about our purpose needs the trust’s consent.</p></div>
     </div>
-    <h3 style="margin:10px 0 18px">Without the athletes’ consent, nobody can:</h3>
+    <h3 class="veto-h rv">Without the athletes’ consent, nobody can:</h3>
     <div class="veto">
-      <div><h3>Change our purpose</h3><p>Caring for gymnasts’ hands and minds stays written into our articles.</p></div>
-      <div><h3>Cut the HOLD Fund formula</h3><p>2% of revenue from the first euro, at least €5k a year, plus 10% of profit.</p></div>
-      <div><h3>Sell it away</h3><p>A merger or sale that would drop our purpose or the fund can be blocked.</p></div>
+      <div class="rv"><span class="vn">1</span><h3>Change our purpose</h3><p>Caring for gymnasts’ hands and minds stays written into our articles.</p></div>
+      <div class="rv"><span class="vn">2</span><h3>Cut the HOLD Fund formula</h3><p>2% of revenue from the first euro, at least €5k a year, plus 10% of profit.</p></div>
+      <div class="rv"><span class="vn">3</span><h3>Sell it away</h3><p>A merger or sale that would drop our purpose or the fund can be blocked.</p></div>
     </div>
-    <p class="cant"><b>Why this matters to you:</b> when you buy HOLD, you are not buying a promise that lasts until the next owner. The people we serve have the final word on what we stand for.</p>
+    <p class="cant rv"><b>Why this matters to you:</b> when you buy HOLD, you are not buying a promise that lasts until the next owner. The people we serve have the final word on what we stand for.</p>
   </div>
 </section>
 
+<!-- 04 · OUR PROMISES -->
 <section id="promises" class="prom">
   <div class="wrap">
-    <span class="n kicker">What comes with every tube</span>
-    <h2 class="h">The good is <span class="lime">in the product.</span></h2>
-    <p class="lead">Take our purpose away and you would lose part of what you buy. That is the test we hold ourselves to.</p>
-    <div class="g3" style="margin-top:44px">
-      <div class="card hl"><span class="n">On every tube</span><div class="big">116 111</div><p>Free, independent help: Nummer gegen Kummer and Safe Sport e.V. Printed where an athlete actually looks: in their kit bag.</p></div>
-      <div class="card"><span class="n">Scan to breathe</span><div class="big">1 min</div><p>The QR code on the tube opens a short breathing reset after training. Free for everyone, with or without a tube. No login, no tracking.</p><p style="margin-top:12px"><a href="#breathe" style="color:var(--lime)">Try it now →</a></p></div>
-      <div class="card"><span class="n">The HOLD Fund</span><div class="big">2%</div><p>of revenue from day one, at least €5k a year, plus 10% of profit. Paid out to independent programmes: 60% “Safe &amp; strong” workshops, 30% help lines, 10% evaluation.</p></div>
-      <div class="card"><span class="n">For your club</span><div class="big">Safe &amp; strong</div><p>Every club season agreement includes an independent workshop on pressure, mistakes and speaking up. Run by a sports psychologist, after signing, with no product in the room.</p></div>
-      <div class="card"><span class="n">Charitable tubes</span><div class="big">1 in 10</div><p>For every ten tubes a club orders, one goes free to an athlete who needs it, passed on discreetly by the club’s youth officer.</p></div>
-      <div class="card"><span class="n">How we advertise</span><div class="big">18+</div><p>No targeted ads to anyone under 18. We show hands, never bodies. We make care claims, never cure claims. And we never sell pain as strength.</p></div>
+    <div class="sec-head">
+      <div class="rv">
+        <span class="n kicker sec"><i>04</i>Our promises</span>
+        <h2 class="h">The good is<br><span class="lime">in the product.</span></h2>
+      </div>
+      <p class="lead rv">What comes with every tube. Take our purpose away and you would lose part of what you buy. <b>That is the test we hold ourselves to.</b></p>
     </div>
-    <p class="ledger">We keep three separate columns and never add them up: the HOLD Fund is our commitment; club workshops are part of our club package and booked as marketing; charitable tubes are product access.</p>
+    <div class="pgrid">
+      <div class="card hl rv"><span class="n">On every tube</span><div class="big">116 111</div><p>Free, independent help: Nummer gegen Kummer and Safe Sport e.V. Printed where an athlete actually looks: in their kit bag.</p></div>
+      <div class="card rv"><span class="n">Scan to breathe</span><div class="big">1 min</div><p>The QR code on the tube opens a short breathing reset after training. Free for everyone, with or without a tube. No login, no tracking.</p><a class="more" href="#breathe">Try it now <span aria-hidden="true">→</span></a></div>
+      <div class="card rv"><span class="n">The HOLD Fund</span><div class="big">2%</div><p>of revenue from day one, at least €5k a year, plus 10% of profit. Paid out to independent programmes: 60% “Safe &amp; strong” workshops, 30% help lines, 10% evaluation.</p><div class="split" aria-hidden="true"><i style="flex:60"></i><i style="flex:30"></i><i style="flex:10"></i></div></div>
+      <div class="card rv"><span class="n">For your club</span><div class="big">Safe &amp; strong</div><p>Every club season agreement includes an independent workshop on pressure, mistakes and speaking up. Run by a sports psychologist, after signing, with no product in the room.</p></div>
+      <div class="card rv"><span class="n">Charitable tubes</span><div class="big">1 in 10</div><p>For every ten tubes a club orders, one goes free to an athlete who needs it, passed on discreetly by the club’s youth officer.</p></div>
+      <div class="card rv"><span class="n">How we advertise</span><div class="big">18+</div><p>No targeted ads to anyone under 18. We show hands, never bodies. We make care claims, never cure claims. And we never sell pain as strength.</p></div>
+    </div>
+    <p class="ledger rv">We keep three separate columns and never add them up: the HOLD Fund is our commitment; club workshops are part of our club package and booked as marketing; charitable tubes are product access.</p>
+
+    <div id="impact" class="impact rv">
+      <div class="impact-h">
+        <span class="n kicker">How we measure it</span>
+        <h3 class="h">Healthier hands. <span class="lime">Lighter heads.</span></h3>
+        <p class="muted">Good intentions are not impact. We will publish a yearly impact report, checked by an independent evaluator, <b class="chalk">and publish it even when the results are not what we hoped.</b></p>
+      </div>
+      <div class="kpis">
+        <div><div class="h">Hand health</div><p>Training days lost to torn hands, reported anonymously by our gymnast panel.</p></div>
+        <div><div class="h">≥ 80%</div><p>of athletes can name a confidential help line after a “Safe &amp; strong” workshop.</p></div>
+        <div><div class="h">+1</div><p>point in coaches’ confidence to recognise overload (5-point scale).</p></div>
+        <div><div class="h">WHO-5</div><p>A well-being study with a university partner: partner clubs vs. comparison clubs.</p></div>
+      </div>
+      <p class="ledger">HOLD never sees individual health data. Surveys are anonymous and run by independent partners.</p>
+    </div>
   </div>
 </section>
 
+<!-- 05 · BREATHE -->
 <section id="breathe" class="breathe">
-  <div class="wrap g2">
-    <a class="orbwrap" href="breathe.html?m=1" aria-label="Start the 1-minute breathing reset"><span class="orb"></span><span class="n">Start</span></a>
-    <div>
-      <span class="n kicker l">Breathe · free for everyone</span>
-      <h2 class="h">Hands done.<br><span class="lime">Now the head.</span></h2>
-      <p class="lead">Short breathing routines (cyclic sighing) to wind down after training. <b>Free for every athlete, coach and parent, whether or not you ever buy HOLD.</b></p>
-      <ul class="free"><li>No purchase</li><li>No sign-up</li><li>No app</li><li>No tracking</li></ul>
-      <div class="dur">
-        <a href="breathe.html?m=1"><b class="h">1 min</b><span>Quick reset after training</span></a>
-        <a href="breathe.html?m=3"><b class="h">3 min</b><span>Calm down after a hard session</span></a>
-        <a href="breathe.html?m=5"><b class="h">5 min</b><span>Before sleep or a competition</span></a>
+  <div class="wrap">
+    <div class="br-top">
+      <div class="rv">
+        <span class="n kicker sec"><i>05</i>Breathe · free for everyone</span>
+        <h2 class="h">Hands done.<br><span class="lime">Now the head.</span></h2>
+        <p class="lead">Six short breathing exercises for the moments gymnasts know. <b>Free for every athlete, coach and parent, whether or not you ever buy HOLD.</b></p>
+        <ul class="free" aria-label="What it costs you"><li>No purchase</li><li>No sign-up</li><li>No app</li><li>No tracking</li></ul>
+      </div>
+      <a class="orbwrap rv" href="breathe.html?x=reset" aria-label="Start the 1-minute after-training reset"><span class="orb" aria-hidden="true"></span><span class="orb-t"><span class="n">Start</span><b class="h">1 min</b><span class="n dim">After training</span></span></a>
+    </div>
+
+    <p class="swipe n" aria-hidden="true">Swipe for all six</p>
+    <div class="ex6">
+      <a class="ex feat rv" href="breathe.html?x=reset" data-wave="i2 i1 o6">
+        <span class="ex-top"><span class="n">After training</span><span class="ex-len">1 min</span></span>
+        <span class="tag n">The reset on every tube</span>
+        <b class="ex-t">Cyclic sighing</b>
+        <span class="ex-d">In through the nose, a short second sip, then a long, slow breath out through the mouth.</span>
+        <span class="ex-w"></span>
+        <span class="ex-go">Start the 1-min reset <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="ex rv" href="breathe.html?x=calm" data-wave="i4 o6">
+        <span class="ex-top"><span class="n">After a hard session</span><span class="ex-len">3 min</span></span>
+        <b class="ex-t">Longer exhale</b>
+        <span class="ex-d">In for 4, out for 6. About six slow breaths a minute.</span>
+        <span class="ex-w"></span><span class="ex-go">Start <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="ex rv" href="breathe.html?x=focus" data-wave="i4 h4 o4 h4">
+        <span class="ex-top"><span class="n">Before you compete</span><span class="ex-len">2 min</span></span>
+        <b class="ex-t">Box breathing</b>
+        <span class="ex-d">In 4, hold 4, out 4, hold 4. Steady, even, square.</span>
+        <span class="ex-w"></span><span class="ex-go">Start <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="ex rv" href="breathe.html?x=hands" data-wave="i4 h3 o7">
+        <span class="ex-top"><span class="n">Release your hands</span><span class="ex-len">2 min</span></span>
+        <b class="ex-t">Grip &amp; release</b>
+        <span class="ex-d">Make a soft fist as you breathe in, hold, then let go and spread your fingers as you breathe out.</span>
+        <span class="ex-w"></span><span class="ex-go">Start <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="ex rv" href="breathe.html?x=mistake" data-wave="i2 i1 o6 i2 i1 o6 i4 o6">
+        <span class="ex-top"><span class="n">After a fall or mistake</span><span class="ex-len">1 min</span></span>
+        <b class="ex-t">Sigh &amp; reset</b>
+        <span class="ex-d">Two cyclic sighs, then slow breaths with short cues. Next skill. Next breath.</span>
+        <span class="ex-w"></span><span class="ex-go">Start <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="ex rv" href="breathe.html?x=sleep" data-wave="i4 o8">
+        <span class="ex-top"><span class="n">Before sleep</span><span class="ex-len">5 min</span></span>
+        <b class="ex-t">Body scan</b>
+        <span class="ex-d">In 4, out 8, letting go from your feet up to your jaw.</span>
+        <span class="ex-w"></span><span class="ex-go">Start <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · SHOP -->
+<section id="shop" class="shop">
+  <div class="wrap">
+    <span class="n kicker sec rv"><i>06</i>Shop</span>
+    <div class="shop-grid">
+      <figure class="tube rv"><img src="assets/tube-photo.jpg" alt="HOLD Recovery Hand Cream, 100 ml tube, on stone with chalk" width="700" height="1080" loading="lazy" decoding="async"></figure>
+      <div class="shop-txt">
+        <div class="rv">
+          <span class="pill n">Pre-order · ships May 2027</span>
+          <h2 class="h">HOLD Recovery<br>Hand Cream</h2>
+          <p class="lead">Water-based, grip-neutral gel-cream for gymnasts’ hands. Keeps calluses supple, not soft.</p>
+          <div class="pricerow"><span class="price">€14.90</span><span class="n muted">100 ml</span></div>
+          <div class="ctas"><a class="btn" href="shop.html">Pre-order <span class="arr" aria-hidden="true">→</span></a></div>
+          <p class="fine">No payment is taken until your order ships.</p>
+        </div>
+        <a class="clubcard rv" href="shop.html#clubs">
+          <span class="n kicker l">For gymnastics clubs</span>
+          <span class="cc-row"><b class="h">€10.95</b><span>per tube from 40 tubes, with a club season agreement.</span></span>
+          <span class="cc-d">A “Safe &amp; strong” workshop is included, plus 1 charitable tube for every 10.</span>
+          <span class="ex-go">Request a club offer <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="impact" style="background:var(--raised)">
-  <div class="wrap">
-    <span class="n kicker">How we measure it</span>
-    <h2 class="h">Healthier hands.<br><span class="lime">Lighter heads.</span></h2>
-    <p class="lead">Good intentions are not impact. We will publish a yearly impact report, checked by an independent evaluator, <b>and publish it even when the results are not what we hoped.</b></p>
-    <div class="kpis">
-      <div><div class="h">Hand health</div><p>Training days lost to torn hands, reported anonymously by our gymnast panel.</p></div>
-      <div><div class="h">≥ 80%</div><p>of athletes can name a confidential help line after a “Safe &amp; strong” workshop.</p></div>
-      <div><div class="h">+1</div><p>point in coaches’ confidence to recognise overload (5-point scale).</p></div>
-      <div><div class="h">WHO-5</div><p>A well-being study with a university partner: partner clubs vs. comparison clubs.</p></div>
-    </div>
-    <p class="ledger">HOLD never sees individual health data. Surveys are anonymous and run by independent partners.</p>
-  </div>
-</section>
-
+<!-- HELP -->
 <section id="help" class="help">
-  <div class="wrap">
-    <span class="n kicker">Need to talk? Today, not someday.</span>
-    <a class="num" href="tel:116111">116 111</a>
-    <p style="font-size:20px;margin-top:10px;max-width:640px"><b>Nummer gegen Kummer.</b> Free, anonymous and independent of HOLD and of your club.</p>
+  <div class="wrap help-grid">
+    <div>
+      <span class="n kicker">Need to talk? Today, not someday.</span>
+      <a class="num" href="tel:116111">116 111</a>
+      <p class="help-l"><b>Nummer gegen Kummer.</b> Free, anonymous and independent of HOLD and of your club.</p>
+    </div>
     <div class="more">
       <div><b>Safe Sport e.V.</b><br>Independent support for people affected by violence in sport.</div>
       <div><b>Anlauf gegen Gewalt</b><br>Independent contact point for people affected by violence in sport.</div>
-      <div><b>In danger right now?</b><br>Call 112.</div>
+      <div><b>In danger right now?</b><br>Call <a href="tel:112">112</a>.</div>
     </div>
   </div>
 </section>
+</main>
 
-<section class="teaser">
-  <div class="wrap g2">
-    <div class="photo" role="img" aria-label="HOLD recovery hand cream, 100 ml tube"></div>
-    <div>
-      <span class="pill n">Pre-order · ships May 2027</span>
-      <h2 class="h" style="margin-top:20px">HOLD Recovery<br>Hand Cream</h2>
-      <p class="lead">Water-based, grip-neutral gel-cream for gymnasts’ hands. Keeps calluses supple, not soft. 100 ml.</p>
-      <p class="price" style="margin:24px 0">€14.90</p>
-      <a class="btn" href="shop.html">Pre-order now</a>
-    </div>
-  </div>
-</section>
-
-<footer><div class="wrap">
-  <div><img src="assets/logo.svg" alt="HOLD"><br>Strong hands. Strong minds.<br>© 2026 HOLD</div>
-  <div><a href="#golden-share">Golden Share</a> · <a href="#promises">Our promises</a> · <a href="#breathe">Breathe (free)</a> · <a href="shop.html">Shop</a><br>Help: 116 111 · Safe Sport e.V.</div>
+<footer class="foot"><div class="wrap">
+  <div class="f-brand"><img src="assets/logo.svg" alt="HOLD" width="80" height="22"><p class="h">Strong hands.<br><span class="lime">Strong minds.</span></p></div>
+  <nav class="f-col" aria-label="Footer"><span class="n">Explore</span><a href="#mission">Mission</a><a href="#story">Our story</a><a href="#golden-share">Golden Share</a><a href="#promises">Our promises</a></nav>
+  <div class="f-col"><span class="n">Free &amp; shop</span><a href="breathe.html">Breathe (free)</a><a href="shop.html">Pre-order</a><a href="shop.html#clubs">For clubs</a></div>
+  <div class="f-col"><span class="n">Help</span><a href="tel:116111">116 111 · Nummer gegen Kummer</a><span>Safe Sport e.V.</span><a href="tel:112">In danger: 112</a></div>
+  <p class="f-fine">© 2026 HOLD</p>
 </div></footer>
+
+<dialog class="filmdlg" id="filmdlg" aria-label="The HOLD film">
+  <div class="fd-in">
+    <button class="fd-x" type="button" data-film-close aria-label="Close film">×</button>
+    <video id="filmvid" controls playsinline preload="none" data-poster="assets/poster.jpg" data-src="assets/hold.mp4"></video>
+  </div>
+</dialog>
+
 <script src="app.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
